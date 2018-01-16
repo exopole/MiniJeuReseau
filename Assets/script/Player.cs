@@ -6,7 +6,4 @@ using UnityEngine;
 public class Player : ScriptableObject {
     public Material material;
     public new string name;
-
-
-
 }

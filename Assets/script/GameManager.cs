@@ -134,4 +134,18 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void setPoint(int point, bool isP1)
+    {
+        if (isP1)
+        {
+            pointsP1 += point;
+            textScoreP1.text = pointsP1.ToString();
+        }
+        else
+        {
+            pointsP2 += point;
+            textScoreP2.text = pointsP2.ToString();
+        }
+    }
+
 }

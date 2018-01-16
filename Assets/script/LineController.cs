@@ -13,13 +13,18 @@ public class LineController : MonoBehaviour {
         if (!isModifie)
         {
             isModifie = true;
-            if (Input.GetMouseButton(0))
+            if (Input.GetKey(KeyCode.LeftControl))
             {
-                gameObject.GetComponent<LineRenderer>().material = GameManager.instance.road;
+                gameObject.GetComponent<LineRenderer>().material = GameManager.instance.barrage;
             }
             else
             {
-                gameObject.GetComponent<LineRenderer>().material = GameManager.instance.barrage;
+                gameObject.GetComponent<LineRenderer>().material = GameManager.instance.road;
+
+                cities[0].linkCities.Add(cities[1]);
+                cities[1].linkCities.Add(cities[0]);
+                cities[0].checkAppartenance();
+                cities[1].checkAppartenance();
             }
             GameManager.instance.isPlayer1 = !GameManager.instance.isPlayer1;
         }
