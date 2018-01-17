@@ -11,10 +11,16 @@ public class GameManager : MonoBehaviour {
     public Player player1;
     public Player player2;
 
+	public Text positionsLeftCount;
     public Text textScoreP1;
     public Text textScoreP2;
+	public Text player1CitiesCount;
+	public Text player2CitiesCount;
+	public Text citiesPlayer1Count;
+	public Text citiesPlayer2Count;
+	public Text linksPlayer1Count;
+	public Text linksPlayer2Count;
 
-    
     private int pointsP1 = 0;
     private int pointsP2 = 0;
 
