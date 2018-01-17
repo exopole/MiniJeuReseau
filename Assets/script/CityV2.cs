@@ -13,7 +13,7 @@ public class CityV2 : MonoBehaviour {
         if (!isTaken)
         {
             isTaken = true;
-            if (GameManager.instance.isPlayer1)
+            if (GameManager.instance.isPlayer1Turn)
             {
                 gameObject.GetComponent<MeshRenderer>().material =GameManager.instance.player1.material;
                 GameManager.instance.addCity(this);
@@ -25,10 +25,20 @@ public class CityV2 : MonoBehaviour {
                 GameManager.instance.addCity(this);
                 isP1 = false;
             }
-            GameManager.instance.isPlayer1 = !GameManager.instance.isPlayer1;
+			GameManager.instance.ChangeTurn();
         }
         
     }
+
+	void OnMouseEnter()
+	{
+		
+	}
+
+	void OnMouseExit()
+	{
+		
+	}
 
     public void checkAppartenance()
     {

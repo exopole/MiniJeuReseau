@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
     static public GameManager instance;
 
-    public bool isPlayer1 = true;
+    public bool isPlayer1Turn = true;
     public Player player1;
     public Player player2;
 
+	public Text MainTextInfoDisplay;
 	public Text positionsLeftCount;
     public Text textScoreP1;
     public Text textScoreP2;
-	public Text player1CitiesCount;
-	public Text player2CitiesCount;
-	public Text citiesPlayer1Count;
-	public Text citiesPlayer2Count;
-	public Text linksPlayer1Count;
-	public Text linksPlayer2Count;
+	public Text player1Name;
+	public Text player2Name;
+
+	public GameObject backToMenuEndGameButton;
 
     private int pointsP1 = 0;
     private int pointsP2 = 0;
@@ -28,9 +28,11 @@ public class GameManager : MonoBehaviour {
     public Material barrage;
 
     public CityV2[] cities;
-    public List<CityV2> citiesPlayer1;
+    
+	public List<CityV2> citiesPlayer1;
     public List<CityV2> citiesPlayer2;
 
+	public string[] AINames;
 
     public LineController[] lines;
 
@@ -44,15 +46,40 @@ public class GameManager : MonoBehaviour {
         {
             instance = this;
             positionPossible += cities.Length + lines.Length;
+			positionsLeftCount.text = positionPossible.ToString ();
         }
         else
             Destroy(gameObject);
     }
 
+	void Start()
+	{
+		StartCoroutine(StartProcedure());
+	}
+
+
+	IEnumerator StartProcedure()
+	{
+		player1Name.text = PlayerPrefs.GetString ("PLAYER_NAME");
+		player2Name.text = AINames [Random.Range (0,AINames.Length)];
+		StartCoroutine(ShowInfo("WELCOME TEXT",2f));
+		yield return new WaitForSecondsRealtime (3f);
+		StartCoroutine(ShowInfo("Your Turn!",2f));
+				
+	}
+
+	public IEnumerator ShowInfo(string info, float displayTime)
+	{
+		MainTextInfoDisplay.enabled = true;
+		MainTextInfoDisplay.text = info;
+		yield return new WaitForSecondsRealtime (displayTime);
+		MainTextInfoDisplay.enabled = false;
+
+	} 
 
     public void addCity(CityV2 city)
     {
-        if (isPlayer1)
+        if (isPlayer1Turn)
         {
             if (!citiesPlayer1.Contains(city))
             {
@@ -81,7 +108,7 @@ public class GameManager : MonoBehaviour {
 
     public void removeCity(CityV2 city)
     {
-        if (isPlayer1)
+        if (isPlayer1Turn)
         {
             if (citiesPlayer1.Contains(city))
             {
@@ -128,7 +155,7 @@ public class GameManager : MonoBehaviour {
 
     public void setPoint(int point)
     {
-        if (isPlayer1)
+        if (isPlayer1Turn)
         {
             pointsP1 += point;
             textScoreP1.text = pointsP1.ToString();
@@ -154,4 +181,42 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+	public void ChangeTurn()
+	{
+		isPlayer1Turn = !isPlayer1Turn;
+		if (isPlayer1Turn) 
+		{
+			StartCoroutine(ShowInfo("YOUR TURN!",1.5f));
+		}
+		ChangePositionPossible (-1);
+	}
+
+	public void ChangePositionPossible(int i)
+	{
+		positionPossible += i;
+		positionsLeftCount.text = positionPossible.ToString ();
+		if (positionPossible == 0) 
+		{
+			FinishTheGame ();
+		}
+	}
+
+	public void FinishTheGame()
+	{
+		StartCoroutine (EndOfGame ());
+	}
+
+	IEnumerator EndOfGame()
+	{
+		backToMenuEndGameButton.SetActive (true);
+		StartCoroutine( ShowInfo ("The Game will restart in 10 seconds...", 10f));
+		yield return new WaitForSecondsRealtime (10f);
+		SceneManager.LoadScene (1);
+	}
+
+	public void GoBackToMenu()
+	{
+		StopCoroutine ("EndOfGame");
+		SceneManager.LoadScene (0);
+	}
 }

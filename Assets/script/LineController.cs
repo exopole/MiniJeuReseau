@@ -26,7 +26,7 @@ public class LineController : MonoBehaviour {
                 cities[0].checkAppartenance();
                 cities[1].checkAppartenance();
             }
-            GameManager.instance.isPlayer1 = !GameManager.instance.isPlayer1;
+			GameManager.instance.ChangeTurn();
         }
 
     }
