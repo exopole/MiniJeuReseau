@@ -46,7 +46,7 @@ public class CityV2 : MonoBehaviour {
                 else
                 {
                     cityP2++;
-                }
+                } 
             }
             if(cityP1>cityP2 && !isP1)
             {
