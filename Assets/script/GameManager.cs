@@ -54,28 +54,28 @@ public class GameManager : MonoBehaviour {
 
 	void Start()
 	{
-		StartCoroutine(StartProcedure());
+		StartProcedure();
 	}
 
 
-	IEnumerator StartProcedure()
+	public void StartProcedure()
 	{
-		player1Name.text = PlayerPrefs.GetString ("PLAYER_NAME");
-		player2Name.text = AINames [Random.Range (0,AINames.Length)];
-		StartCoroutine(ShowInfo("WELCOME TEXT",2f));
-		yield return new WaitForSecondsRealtime (3f);
-		StartCoroutine(ShowInfo("Your Turn!",2f));
+		player1Name.text = player1.name;
+        player2.name = AINames[Random.Range(0, AINames.Length)];
+        player2Name.text = player2.name;
+        MainTextInfoDisplay.text = "Your Turn " + player1.name + "!";
 				
 	}
 
-	public IEnumerator ShowInfo(string info, float displayTime)
-	{
-		MainTextInfoDisplay.enabled = true;
-		MainTextInfoDisplay.text = info;
-		yield return new WaitForSecondsRealtime (displayTime);
-		MainTextInfoDisplay.enabled = false;
+    public IEnumerator ShowInfo(string info, float displayTime)
+    {
+        MainTextInfoDisplay.enabled = true;
+        MainTextInfoDisplay.text = info;
+        yield return new WaitForSecondsRealtime(displayTime);
+        MainTextInfoDisplay.enabled = false;
 
-	} 
+    }
+    
 
     public void addCity(CityV2 city)
     {
@@ -186,8 +186,12 @@ public class GameManager : MonoBehaviour {
 		isPlayer1Turn = !isPlayer1Turn;
 		if (isPlayer1Turn) 
 		{
-			StartCoroutine(ShowInfo("YOUR TURN!",1.5f));
+			MainTextInfoDisplay.text = "YOUR TURN " + player1.name + "!";
 		}
+        else
+        {
+            MainTextInfoDisplay.text = "YOUR TURN " + player2.name + "!";
+        }
 		ChangePositionPossible (-1);
 	}
 

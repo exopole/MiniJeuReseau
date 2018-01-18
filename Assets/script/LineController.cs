@@ -8,7 +8,7 @@ public class LineController : MonoBehaviour {
 
     public bool isModifie = false;
 
-    private void OnMouseDown()
+    private void OnMouseUp()
     {
         if (!isModifie)
         {

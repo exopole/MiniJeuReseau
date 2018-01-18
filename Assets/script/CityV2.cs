@@ -8,7 +8,7 @@ public class CityV2 : MonoBehaviour {
     public bool isTaken = false;
     public bool isP1 = false;
 
-    private void OnMouseDown()
+    private void OnMouseUp()
     {
         if (!isTaken)
         {

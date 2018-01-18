@@ -6,21 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour 
 {
-	public string playerName;
+	public Player player;
 	public Text playerNameDisplay;
 	public bool FirstTimePlaying;
-	public int numberOfGamesPlayed;
-	public int numberOfWins;
-	public int numberOfLoose;
 
 	void Start()
 	{
-		if(!PlayerPrefs.HasKey("PLAYER_NAME"))
-		{
-			PlayerPrefs.SetString ("PLAYER_NAME", "NewPlayer");
-		}
-		playerName = PlayerPrefs.GetString ("PLAYER_NAME");
-		playerNameDisplay.text = playerName;
+		playerNameDisplay.text = player.name;
 	}
 
 	public void StartNewGame()
@@ -34,9 +26,8 @@ public class MainMenuManager : MonoBehaviour
 	}
 	public void ChangeMyPlayerName(string name)
 	{
-		playerName = name;
-		PlayerPrefs.SetString ("PLAYER_NAME", name);
-		playerNameDisplay.text = playerName;
+		player.name = name;
+		playerNameDisplay.text = name;
 
 	}
 
