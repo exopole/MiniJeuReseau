@@ -8,8 +8,9 @@ public class GameManager : MonoBehaviour {
 
     static public GameManager instance;
 
-    public bool isPlayer1Turn = true;
-    public Player player1;
+	public bool isPlayer1Turn = true;
+    
+	public Player player1;
     public Player player2;
 
 	public Text MainTextInfoDisplay;
@@ -19,10 +20,11 @@ public class GameManager : MonoBehaviour {
 	public Text player1Name;
 	public Text player2Name;
 
+	public GameObject localPlayerObj;
 	public GameObject backToMenuEndGameButton;
 
-    private int pointsP1 = 0;
-    private int pointsP2 = 0;
+    public int pointsP1 = 0;
+	public int pointsP2 = 0;
 
     public Material road;
     public Material barrage;
@@ -52,21 +54,22 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
     }
 
-	void Start()
-	{
-		StartCoroutine(StartProcedure());
-	}
-
-
-	IEnumerator StartProcedure()
-	{
-		player1Name.text = PlayerPrefs.GetString ("PLAYER_NAME");
-		player2Name.text = AINames [Random.Range (0,AINames.Length)];
-		StartCoroutine(ShowInfo("WELCOME TEXT",2f));
-		yield return new WaitForSecondsRealtime (3f);
-		StartCoroutine(ShowInfo("Your Turn!",2f));
-				
-	}
+//	void Start()
+//	{
+//		StartCoroutine(StartProcedure());
+//	}
+//
+//
+//	IEnumerator StartProcedure()
+//	{
+//		
+////		player1Name.text = PlayerPrefs.GetString ("PLAYER_NAME");
+////		player2Name.text = AINames [Random.Range (0,AINames.Length)];
+//		StartCoroutine(ShowInfo("WELCOME TEXT",2f));
+//		yield return new WaitForSecondsRealtime (3f);
+//		StartCoroutine(ShowInfo("Your Turn!",2f));
+//				
+//	}
 
 	public IEnumerator ShowInfo(string info, float displayTime)
 	{
@@ -84,7 +87,7 @@ public class GameManager : MonoBehaviour {
             if (!citiesPlayer1.Contains(city))
             {
                 citiesPlayer1.Add(city);
-                setPoint(1);
+//                setPoint(1);
                 textScoreP1.text = pointsP1.ToString();
             }
             else
@@ -97,7 +100,7 @@ public class GameManager : MonoBehaviour {
             if (!citiesPlayer2.Contains(city))
             {
                 citiesPlayer2.Add(city);
-                setPoint(1);
+//                setPoint(1);
             }
             else
             {
@@ -113,7 +116,7 @@ public class GameManager : MonoBehaviour {
             if (citiesPlayer1.Contains(city))
             {
                 citiesPlayer1.Remove(city);
-                setPoint(-1);
+//                setPoint(-1);
             }
             else
             {
@@ -125,7 +128,7 @@ public class GameManager : MonoBehaviour {
             if (citiesPlayer2.Contains(city))
             {
                 citiesPlayer2.Remove(city);
-                setPoint(-1);
+//                setPoint(-1);
             }
             else
             {
@@ -151,7 +154,29 @@ public class GameManager : MonoBehaviour {
         Debug.Log(result);
     }
 
-    
+	public void AddPointP1(bool wasOwned)
+	{
+		if (wasOwned) 
+		{
+			pointsP2--;
+			textScoreP2.text = pointsP2.ToString();
+
+		}
+		pointsP1++;
+		textScoreP1.text = pointsP1.ToString();
+	}
+
+	public void AddPointP2(bool wasOwned)
+	{
+		if (wasOwned) 
+		{
+			pointsP1--;
+			textScoreP1.text = pointsP1.ToString();
+
+		}
+		pointsP2++;
+		textScoreP2.text = pointsP2.ToString();
+	}
 
     public void setPoint(int point)
     {
