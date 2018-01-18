@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a314155aabf2a4ca21f95ca28b9411, type: 3}
+  m_Name: Link
+  m_EditorClassIdentifier: 
+  roadMaterial: {fileID: 2100000, guid: edfd757b0035fd145a7b90fb67c27429, type: 2}
+  barrageMaterial: {fileID: 2100000, guid: 5df502ea3b6a0394c887b0807600d85b, type: 2}
+  neutralMaterial: {fileID: 2100000, guid: 034fb86e26c32c84ebd5391b3e070074, type: 2}
+  waitingMaterial: {fileID: 2100000, guid: 17c20ef559e93d848a0cfd83d303b8fe, type: 2}

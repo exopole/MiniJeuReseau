@@ -15,7 +15,7 @@ public class CityV2 : MonoBehaviour {
             isTaken = true;
             if (GameManager.instance.isPlayer1Turn)
             {
-                gameObject.GetComponent<MeshRenderer>().material =GameManager.instance.player1.material;
+                gameObject.GetComponent<MeshRenderer>().material = GameManager.instance.player1.material;
                 GameManager.instance.addCity(this);
                 isP1 = true;
             }
@@ -25,7 +25,8 @@ public class CityV2 : MonoBehaviour {
                 GameManager.instance.addCity(this);
                 isP1 = false;
             }
-			GameManager.instance.ChangeTurn();
+            GameManager.instance.ChangeTurn();
+            //GameManager.instance.takeCity(gameObject);
         }
         
     }

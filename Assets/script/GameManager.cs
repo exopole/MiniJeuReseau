@@ -18,14 +18,15 @@ public class GameManager : MonoBehaviour {
     public Text textScoreP2;
 	public Text player1Name;
 	public Text player2Name;
+    public Image player1Image;
+    public Image player2Image;
 
 	public GameObject backToMenuEndGameButton;
 
     private int pointsP1 = 0;
     private int pointsP2 = 0;
 
-    public Material road;
-    public Material barrage;
+    public Link link;
 
     public CityV2[] cities;
     
@@ -35,10 +36,13 @@ public class GameManager : MonoBehaviour {
 	public string[] AINames;
 
     public LineController[] lines;
-
-
-
+    
     public int positionPossible = 0;
+
+    public GameObject objectSelect;
+
+    public GameObject panelLink;
+    public GameObject panelCity;
 
     private void Awake()
     {
@@ -61,6 +65,8 @@ public class GameManager : MonoBehaviour {
 	public void StartProcedure()
 	{
 		player1Name.text = player1.name;
+        player1Image.color = player1.material.color;
+        player2Image.color = player2.material.color;
         player2.name = AINames[Random.Range(0, AINames.Length)];
         player2Name.text = player2.name;
         MainTextInfoDisplay.text = "Your Turn " + player1.name + "!";
@@ -193,7 +199,9 @@ public class GameManager : MonoBehaviour {
             MainTextInfoDisplay.text = "YOUR TURN " + player2.name + "!";
         }
 		ChangePositionPossible (-1);
-	}
+        panelLink.SetActive(false);
+        objectSelect = null;
+    }
 
 	public void ChangePositionPossible(int i)
 	{
@@ -223,4 +231,73 @@ public class GameManager : MonoBehaviour {
 		StopCoroutine ("EndOfGame");
 		SceneManager.LoadScene (0);
 	}
+    
+    public void takeCity(GameObject obj)
+    {
+        objectSelect = obj;
+        gameObject.GetComponent<mouseDetect>().isSelect = true;
+        panelCity.SetActive(true);
+    }
+
+    public void takeLink(GameObject obj)
+    {
+        if (objectSelect && objectSelect.GetComponent<LineRenderer>())
+        {
+            objectSelect.GetComponent<LineRenderer>().material = link.neutralMaterial;
+        }
+
+        objectSelect = obj;
+        obj.GetComponent<LineRenderer>().material = link.waitingMaterial;
+        gameObject.GetComponent<mouseDetect>().isSelect = true;
+        panelLink.SetActive(true);
+    }
+
+    public void setLink(bool isRoad)
+    {
+        if (isRoad)
+        {
+            objectSelect.GetComponent<LineController>().setLink(link.roadMaterial, true);
+        }
+        else
+        {
+            objectSelect.GetComponent<LineController>().setLink(link.barrageMaterial, false);
+        }
+        
+        objectSelect.GetComponent<LineController>().isModifie = true;
+        panelLink.SetActive(false);
+        ChangeTurn();
+    }
+
+    public void changeCity()
+    {
+        if (isPlayer1Turn)
+        {
+            objectSelect.GetComponent<MeshRenderer>().material = player1.material;
+            addCity(objectSelect.GetComponent<CityV2>());
+            objectSelect.GetComponent<CityV2>().isP1 = true;
+        }
+        else
+        {
+            objectSelect.GetComponent<MeshRenderer>().material = player2.material;
+            addCity(objectSelect.GetComponent<CityV2>());
+            objectSelect.GetComponent<CityV2>().isP1 = false;
+        }
+        
+        objectSelect.GetComponent<CityV2>().isTaken = true;
+        panelCity.SetActive(false);
+        ChangeTurn();
+
+    }
+
+    public void stopChoice()
+    {
+        if (objectSelect)
+        {
+            objectSelect.GetComponent<LineRenderer>().material = link.neutralMaterial;
+            gameObject.GetComponent<mouseDetect>().isSelect = false;
+            panelLink.SetActive(false);
+        }
+        
+    }
+    
 }
