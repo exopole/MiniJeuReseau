@@ -10,6 +10,8 @@ public class CityV2 : NetworkBehaviour {
     public bool isP1 = false;
 	public MeshRenderer meshR;
 	[SyncVar]public int cityID;
+	public Material matNeutral;
+	public Material matNeutralHover;
 	bool isP1Turn;
 
 
@@ -66,12 +68,19 @@ public class CityV2 : NetworkBehaviour {
 
 	void OnMouseEnter()
 	{
-		
+		if (!isTaken) {
+			GameManager.instance.ChangeCursor (true);
+			meshR.material = matNeutralHover;
+		}
 	}
 
 	void OnMouseExit()
 	{
-		
+		if (!isTaken) {
+			
+			GameManager.instance.ChangeCursor (false);
+			meshR.material = matNeutral;
+		}
 	}
 
     public void checkAppartenance()

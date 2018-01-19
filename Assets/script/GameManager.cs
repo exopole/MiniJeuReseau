@@ -38,9 +38,12 @@ public class GameManager : MonoBehaviour {
 
     public LineController[] lines;
 
-
-
     public int positionPossible = 0;
+
+	public MeshRenderer PlateauMeshR;
+
+	public Texture2D cursorNormal;
+	public Texture2D cursorOver;
 
     private void Awake()
     {
@@ -54,22 +57,17 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
     }
 
-//	void Start()
-//	{
-//		StartCoroutine(StartProcedure());
-//	}
-//
-//
-//	IEnumerator StartProcedure()
-//	{
-//		
-////		player1Name.text = PlayerPrefs.GetString ("PLAYER_NAME");
-////		player2Name.text = AINames [Random.Range (0,AINames.Length)];
-//		StartCoroutine(ShowInfo("WELCOME TEXT",2f));
-//		yield return new WaitForSecondsRealtime (3f);
-//		StartCoroutine(ShowInfo("Your Turn!",2f));
-//				
-//	}
+	public void ChangeCursor(bool isOver)
+	{
+		if (isOver) 
+		{
+			Cursor.SetCursor (cursorOver, new Vector2 (8f, 8f), CursorMode.Auto);
+		} else 
+		{
+			Cursor.SetCursor (cursorNormal, new Vector2 (8f, 8f), CursorMode.Auto);
+
+		}
+	}
 
 	public IEnumerator ShowInfo(string info, float displayTime)
 	{

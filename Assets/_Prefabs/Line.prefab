@@ -36,13 +36,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1722237021405838}
-  m_LocalRotation: {x: -0, y: 0.3790698, z: -0, w: 0.9253681}
-  m_LocalPosition: {x: -5.824835, y: 0, z: -5.8473577}
-  m_LocalScale: {x: 1, y: 1, z: 3.5863166}
+  m_LocalRotation: {x: -0, y: 0.70608306, z: -0, w: 0.70812905}
+  m_LocalPosition: {x: -5.7, y: 0, z: 5.65}
+  m_LocalScale: {x: 1, y: 1, z: 5.38025}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 44.552002, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.83401, z: 0}
 --- !u!65 &65956651288005526
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -98,8 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de906ddd19f24754cb92029435b93a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cities: []
-  isModifie: 0
+  cities:
+  - {fileID: 0}
+  - {fileID: 0}
+  lineID: 0
+  isModified: 0
+  matNormal: {fileID: 2100000, guid: 034fb86e26c32c84ebd5391b3e070074, type: 2}
+  matHover: {fileID: 2100000, guid: 41dab1be02b9a0940ad1486023d2fe8f, type: 2}
+  matHoverBarrage: {fileID: 2100000, guid: 6fe323c914484e840bcc28890d7a9e76, type: 2}
 --- !u!120 &120517285540187634
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -114,7 +120,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 034fb86e26c32c84ebd5391b3e070074, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

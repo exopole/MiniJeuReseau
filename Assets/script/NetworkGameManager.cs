@@ -12,6 +12,8 @@ public class NetworkGameManager : NetworkBehaviour {
 	public static NetworkGameManager instance;
 	[SyncVar]public bool GameHasBegun;
 	[SyncVar(hook = "ActuPlayerTurn")] public bool isPlayer1Turn;
+	public Material[] matPlayerTurn;
+	public Material[] matOpponentTurn;
 
 	//référencement de la fonction static.
 	void Awake()
@@ -56,6 +58,8 @@ public class NetworkGameManager : NetworkBehaviour {
 	{
 		GameHasBegun = true;
 		StartCoroutine(GameManager.instance.ShowInfo("You play first!", 1f));
+		GameManager.instance.PlateauMeshR.materials = matPlayerTurn;
+
 	}
 
 	//appeler chez le serveur pour changer le tour.
@@ -69,8 +73,10 @@ public class NetworkGameManager : NetworkBehaviour {
 			if (isPlayer1Turn) //si c'est ton tour et t'es serveur
 			{
 				StartCoroutine( GameManager.instance.ShowInfo ("Your Turn", 1f));
+				GameManager.instance.PlateauMeshR.materials = matPlayerTurn;
 			} else 
 			{
+				GameManager.instance.PlateauMeshR.materials= matOpponentTurn;
 
 			}
 		} else 
@@ -78,8 +84,11 @@ public class NetworkGameManager : NetworkBehaviour {
 			if (!isPlayer1Turn) //si c'est ton tour que t'es pas serveur.
 			{
 				StartCoroutine( GameManager.instance.ShowInfo ("Your Turn", 1f));
+				GameManager.instance.PlateauMeshR.materials = matOpponentTurn;
+
 			} else 
 			{
+				GameManager.instance.PlateauMeshR.materials = matPlayerTurn;
 
 			}
 		}

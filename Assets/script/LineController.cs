@@ -8,7 +8,15 @@ public class LineController : NetworkBehaviour {
     public CityV2[] cities;
 	[SyncVar]public int lineID;
     public bool isModified = false;
+	public Material matNormal;
+	public Material matHover;
+	public Material matHoverBarrage;
+	LineRenderer lineR;
 
+	void Start()
+	{
+		lineR = GetComponent<LineRenderer> ();
+	}
     private void OnMouseDown()
 	{
 		if (NetworkGameManager.instance.GameHasBegun) {
@@ -26,6 +34,29 @@ public class LineController : NetworkBehaviour {
 					}
 				}
 			}
+		}
+	}
+	void OnMouseEnter()
+	{
+		if (!isModified) {
+			if (Input.GetKey (KeyCode.LeftControl)) 
+			{
+				lineR.material = matHoverBarrage;
+
+				return;
+			}
+			GameManager.instance.ChangeCursor (true);
+			lineR.material = matHover;
+		}
+	}
+
+	void OnMouseExit()
+	{
+		if (!isModified) {
+			
+			GameManager.instance.ChangeCursor (false);
+			lineR.material = matNormal;
+
 		}
 	}
 
