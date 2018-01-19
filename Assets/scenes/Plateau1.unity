@@ -2136,6 +2136,7 @@ GameObject:
   - component: {fileID: 1045930523}
   - component: {fileID: 1045930522}
   - component: {fileID: 1045930521}
+  - component: {fileID: 1045930525}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2206,6 +2207,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
+--- !u!114 &1045930525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045930520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: aed4e7ab5bb3a02428c0908bfac56241, type: 2}
 --- !u!114 &1048263149 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114983824203730820, guid: b7d127f83edef3344a6500b27fd8e863,
@@ -4388,12 +4401,12 @@ Prefab:
     - target: {fileID: 114128497526973606, guid: d65178d874bdee24791132b04c74c04d,
         type: 2}
       propertyPath: m_Color.a
-      value: 0.184
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114080521197649918, guid: d65178d874bdee24791132b04c74c04d,
         type: 2}
       propertyPath: m_Color.a
-      value: 0.197
+      value: 0.084
       objectReference: {fileID: 0}
     - target: {fileID: 224446231027145726, guid: d65178d874bdee24791132b04c74c04d,
         type: 2}
