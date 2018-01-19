@@ -8,6 +8,7 @@ public class CityV2 : NetworkBehaviour {
     public List<CityV2> linkCities;
     public bool isTaken = false;
     public bool isP1 = false;
+	public MeshRenderer meshR;
 	[SyncVar]public int cityID;
 	bool isP1Turn;
 
@@ -48,14 +49,14 @@ public class CityV2 : NetworkBehaviour {
 
 		if (wasP1Turn) 
 		{
-			gameObject.GetComponent<MeshRenderer>().material =GameManager.instance.player1.material;
+			meshR.material =GameManager.instance.player1.material;
 			isP1 = true;
 			GameManager.instance.addCity(this);
 			GameManager.instance.AddPointP1 (false);
 		} 
 		else 
 		{
-			gameObject.GetComponent<MeshRenderer>().material = GameManager.instance.player2.material;
+			meshR.material = GameManager.instance.player2.material;
 			isP1 = false;
 			GameManager.instance.addCity(this);
 			GameManager.instance.AddPointP2 (false);
@@ -93,7 +94,7 @@ public class CityV2 : NetworkBehaviour {
             }
             if(cityP1>cityP2 && !isP1)
             {
-                gameObject.GetComponent<MeshRenderer>().material = GameManager.instance.player1.material;
+				meshR.material = GameManager.instance.player1.material;
                 GameManager.instance.addCity(this);
 				GameManager.instance.AddPointP1 (true);
 
@@ -107,7 +108,7 @@ public class CityV2 : NetworkBehaviour {
             }
             else if (cityP1 < cityP2 && isP1)
             {
-                gameObject.GetComponent<MeshRenderer>().material = GameManager.instance.player2.material;
+				meshR.material = GameManager.instance.player2.material;
                 GameManager.instance.addCity(this);
 				GameManager.instance.AddPointP2 (true);
 //                GameManager.instance.setPoint(-1, true);
