@@ -42,8 +42,8 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
         {
 			if (matchMaker == null) matchMaker = gameObject.AddComponent<NetworkMatch>();
 			StartMatchMaker();
-
-			StartHostAll("Hello World", customConfig ? (uint)(maxConnections + 1) : matchSize);   
+			StartHostAll("VersionDev",2,true,"",0,0,7777,null);
+//			StartHostAll("Hello World", customConfig ? (uint)(maxConnections + 1) : matchSize);   
 			return;
         }
 

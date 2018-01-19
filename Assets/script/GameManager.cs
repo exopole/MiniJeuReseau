@@ -236,12 +236,11 @@ public class GameManager : MonoBehaviour {
 		backToMenuEndGameButton.SetActive (true);
 		StartCoroutine( ShowInfo ("The Game will restart in 10 seconds...", 10f));
 		yield return new WaitForSecondsRealtime (10f);
-		SceneManager.LoadScene (1);
-	}
+		NATTraversal.NetworkManager.singleton.ServerChangeScene ("Plateau1");	}
 
 	public void GoBackToMenu()
 	{
 		StopCoroutine ("EndOfGame");
-		SceneManager.LoadScene (0);
+		NATTraversal.NetworkManager.singleton.StopClient ();
 	}
 }
