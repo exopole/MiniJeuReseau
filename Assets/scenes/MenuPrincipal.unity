@@ -1242,6 +1242,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114035299815462902, guid: 5bd09958678385348aedd5f1cc7ad145,
+        type: 2}
+      propertyPath: m_Channels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4279609741448850, guid: 5bd09958678385348aedd5f1cc7ad145, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1272,6 +1277,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4279609741448850, guid: 5bd09958678385348aedd5f1cc7ad145, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114035299815462902, guid: 5bd09958678385348aedd5f1cc7ad145,
+        type: 2}
+      propertyPath: m_Channels.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114035299815462902, guid: 5bd09958678385348aedd5f1cc7ad145,
+        type: 2}
+      propertyPath: m_CustomConfig
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

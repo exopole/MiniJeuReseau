@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PlayerNetworkManager : NetworkBehaviour  
 {
 	[SyncVar] string playerName;
+
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -23,10 +25,13 @@ public class PlayerNetworkManager : NetworkBehaviour
 
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+
+	void OnDisable()
+	{
+		if (!isLocalPlayer) {
+			NATTraversal.NetworkManager.singleton.StopClient ();
+		}
 	}
 
 	public override void OnStartServer ()

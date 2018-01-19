@@ -241,6 +241,7 @@ public class GameManager : MonoBehaviour {
 	public void GoBackToMenu()
 	{
 		StopCoroutine ("EndOfGame");
-		NATTraversal.NetworkManager.singleton.StopClient ();
+
+		NATTraversal.NetworkManager.singleton.StopHost();
 	}
 }
