@@ -1406,7 +1406,37 @@ Prefab:
     - target: {fileID: 114035299815462902, guid: 5bd09958678385348aedd5f1cc7ad145,
         type: 2}
       propertyPath: m_CustomConfig
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114035299815462902, guid: 5bd09958678385348aedd5f1cc7ad145,
+        type: 2}
+      propertyPath: m_ConnectionConfig.m_ConnectTimeout
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114035299815462902, guid: 5bd09958678385348aedd5f1cc7ad145,
+        type: 2}
+      propertyPath: m_ConnectionConfig.m_DisconnectTimeout
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114035299815462902, guid: 5bd09958678385348aedd5f1cc7ad145,
+        type: 2}
+      propertyPath: m_ConnectionConfig.m_PingTimeout
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114035299815462902, guid: 5bd09958678385348aedd5f1cc7ad145,
+        type: 2}
+      propertyPath: m_GlobalConfig.m_ReactorMaximumReceivedMessages
+      value: 4092
+      objectReference: {fileID: 0}
+    - target: {fileID: 114035299815462902, guid: 5bd09958678385348aedd5f1cc7ad145,
+        type: 2}
+      propertyPath: m_GlobalConfig.m_ReactorMaximumSentMessages
+      value: 4092
+      objectReference: {fileID: 0}
+    - target: {fileID: 114035299815462902, guid: 5bd09958678385348aedd5f1cc7ad145,
+        type: 2}
+      propertyPath: m_MaxConnections
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5bd09958678385348aedd5f1cc7ad145, type: 2}
