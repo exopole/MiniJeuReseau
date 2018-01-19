@@ -243,5 +243,7 @@ public class GameManager : MonoBehaviour {
 		StopCoroutine ("EndOfGame");
 
 		NATTraversal.NetworkManager.singleton.StopHost();
+		Destroy (NATTraversal.NetworkManager.singleton.gameObject);
+
 	}
 }

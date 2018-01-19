@@ -30,7 +30,7 @@ public class PlayerNetworkManager : NetworkBehaviour
 	void OnDisable()
 	{
 		if (!isLocalPlayer) {
-			NATTraversal.NetworkManager.singleton.StopClient ();
+			NATTraversal.NetworkManager.singleton.StopHost ();
 		}
 	}
 

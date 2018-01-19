@@ -13,6 +13,19 @@ using UnityEngine.Networking.Types;
 [HelpURL("http://grabblesgame.com/nat-traversal/docs/class_n_a_t_traversal_1_1_network_manager.html")]
 public class ExampleNetworkManager : NATTraversal.NetworkManager
 {
+//	public static ExampleNetworkManager instance;
+//
+//
+//	public override void Awake()
+//	{
+//		if (instance != null) 
+//		{
+//			Destroy (this);
+//		} else 
+//		{
+//			instance = this;
+//		}
+//	}
 
 	public void JoinOrCreateOnlineGame()
 	{

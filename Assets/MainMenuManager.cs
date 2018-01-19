@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class MainMenuManager : MonoBehaviour 
 {
 	public string playerName;
@@ -12,6 +13,7 @@ public class MainMenuManager : MonoBehaviour
 	public int numberOfGamesPlayed;
 	public int numberOfWins;
 	public int numberOfLoose;
+	public Button startOnlineGameBtn;
 
 	void Start()
 	{
@@ -39,5 +41,17 @@ public class MainMenuManager : MonoBehaviour
 		playerNameDisplay.text = playerName;
 
 	}
+
+//	public void InitializeTheMenuBtn()
+//	{
+//		startOnlineGameBtn.onClick.RemoveAllListeners ();
+//		startOnlineGameBtn.onClick.AddListener ( StartAnOnlineGameCapsule);
+//	}
+//
+//	public void StartAnOnlineGameCapsule()
+//	{
+//		Debug.Log ("done");
+////		NATTraversal.NetworkManager.singleton.
+//	}
 
 }
