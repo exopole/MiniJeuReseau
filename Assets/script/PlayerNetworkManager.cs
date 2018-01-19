@@ -101,7 +101,7 @@ public class PlayerNetworkManager : NetworkBehaviour
 		NetworkGameManager.instance.ChangePlayerTurn ();
 		foreach (LineController lineC in GameManager.instance.lines) {
 			if (lineC.lineID == lineid) {	
-				lineC.RpcChangeTheLineToRoad ();
+				lineC.RpcChangeTheLineToBarrage ();
 				break;
 			}
 		}
