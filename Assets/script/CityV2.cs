@@ -16,10 +16,10 @@ public class CityV2 : NetworkBehaviour {
 	{
 		if (NetworkGameManager.instance.GameHasBegun) {
 			if (!isTaken) {
-				isTaken = true;
 				if (NetworkGameManager.instance.isPlayer1Turn && isServer || !NetworkGameManager.instance.isPlayer1Turn && !isServer) {
 					isP1Turn = NetworkGameManager.instance.isPlayer1Turn;
 					GameManager.instance.localPlayerObj.GetComponent<PlayerNetworkManager> ().CaptureCity (cityID, isP1Turn);
+					isTaken = true;
 
 				}
 

@@ -18,6 +18,7 @@ public class LineController : NetworkBehaviour {
 					if (Input.GetKey (KeyCode.LeftControl)) {
 						GameManager.instance.localPlayerObj.GetComponent<PlayerNetworkManager> ().CaptureLineMakeBarrage (lineID);
 						isModified = true;
+						return;
 
 					} else {	
 						GameManager.instance.localPlayerObj.GetComponent<PlayerNetworkManager> ().CaptureLineMakeRoad (lineID);
