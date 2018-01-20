@@ -45,6 +45,9 @@ public class GameManager : MonoBehaviour {
 	public Texture2D cursorNormal;
 	public Texture2D cursorOver;
 
+	public Slider timeLeftSliderP1;
+	public Slider timeLeftSliderP2;
+
     private void Awake()
     {
         if (instance == null)
@@ -243,5 +246,26 @@ public class GameManager : MonoBehaviour {
 		NATTraversal.NetworkManager.singleton.StopHost();
 		Destroy (NATTraversal.NetworkManager.singleton.gameObject);
 
+	}
+
+	IEnumerator ActivateTimer ()
+	{
+		while (true) {
+			if (NetworkGameManager.instance.isPlayer1Turn) {
+				timeLeftSliderP1.value -= .5f;
+				yield return new WaitForSecondsRealtime (.5f);
+				if (timeLeftSliderP1.value <= 0) {
+					NetworkGameManager.instance.ChangePlayerTurn ();
+					yield break;
+				}
+			} else {
+				timeLeftSliderP2.value -= .5f;
+				yield return new WaitForSecondsRealtime (.5f);
+				if (timeLeftSliderP2.value <= 0) {
+					NetworkGameManager.instance.ChangePlayerTurn ();
+					yield break;
+				}
+			}
+		}
 	}
 }

@@ -12,6 +12,7 @@ public class LineController : NetworkBehaviour {
 	public Material matHover;
 	public Material matHoverBarrage;
 	LineRenderer lineR;
+	Material tmpMat; //utiliser pour faire clignoter.
 
 	void Start()
 	{
@@ -64,11 +65,12 @@ public class LineController : NetworkBehaviour {
 	public void RpcChangeTheLineToRoad()
 	{
 		isModified = true;
-		gameObject.GetComponent<LineRenderer>().material = GameManager.instance.road;
+		lineR.material = GameManager.instance.road;
 		cities[0].linkCities.Add(cities[1]);
 		cities[1].linkCities.Add(cities[0]);
 		cities[0].checkAppartenance();
 		cities[1].checkAppartenance();
+		StartCoroutine (AfterCaptureProcedure ());
 
 	}
 
@@ -76,7 +78,25 @@ public class LineController : NetworkBehaviour {
 	public void RpcChangeTheLineToBarrage()
 	{
 		isModified = true;
-		gameObject.GetComponent<LineRenderer>().material = GameManager.instance.barrage;
+		lineR.material = GameManager.instance.barrage;
+		StartCoroutine (AfterCaptureProcedure ());
+
+	}
+	IEnumerator AfterCaptureProcedure()
+	{
+		tmpMat = lineR.material;
+		yield return new WaitForSecondsRealtime (.3f);
+		lineR.material = matNormal;
+		yield return new WaitForSecondsRealtime (.3f);
+		lineR.material = tmpMat;
+		yield return new WaitForSecondsRealtime (.3f);
+		lineR.material = matNormal;
+		yield return new WaitForSecondsRealtime (.2f);
+		lineR.material = tmpMat;
+		yield return new WaitForSecondsRealtime (.2f);
+		lineR.material = matNormal;
+		yield return new WaitForSecondsRealtime (.1f);
+		lineR.material = tmpMat;
 
 	}
 }

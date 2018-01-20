@@ -12,6 +12,7 @@ public class CityV2 : NetworkBehaviour {
 	[SyncVar]public int cityID;
 	public Material matNeutral;
 	public Material matNeutralHover;
+	Material tmpMat; //utiliser pour faire clignoter
 	bool isP1Turn;
 
 
@@ -19,7 +20,8 @@ public class CityV2 : NetworkBehaviour {
 	{
 		if (NetworkGameManager.instance.GameHasBegun) {
 			if (!isTaken) {
-				if (NetworkGameManager.instance.isPlayer1Turn && isServer || !NetworkGameManager.instance.isPlayer1Turn && !isServer) {
+				if (NetworkGameManager.instance.isPlayer1Turn && isServer || !NetworkGameManager.instance.isPlayer1Turn && !isServer) 
+				{
 					isP1Turn = NetworkGameManager.instance.isPlayer1Turn;
 					GameManager.instance.localPlayerObj.GetComponent<PlayerNetworkManager> ().CaptureCity (cityID, isP1Turn);
 					isTaken = true;
@@ -64,6 +66,7 @@ public class CityV2 : NetworkBehaviour {
 			GameManager.instance.AddPointP2 (false);
 
 		}
+		StartCoroutine (AfterCaptureProcedure ());
 	}
 
 	void OnMouseEnter()
@@ -106,6 +109,7 @@ public class CityV2 : NetworkBehaviour {
 				meshR.material = GameManager.instance.player1.material;
                 GameManager.instance.addCity(this);
 				GameManager.instance.AddPointP1 (true);
+				StartCoroutine (AfterCaptureProcedure ());
 
 //                GameManager.instance.setPoint(+1, true);
 //                GameManager.instance.setPoint(-1, false);
@@ -120,6 +124,8 @@ public class CityV2 : NetworkBehaviour {
 				meshR.material = GameManager.instance.player2.material;
                 GameManager.instance.addCity(this);
 				GameManager.instance.AddPointP2 (true);
+				StartCoroutine (AfterCaptureProcedure ());
+
 //                GameManager.instance.setPoint(-1, true);
 //                GameManager.instance.setPoint(+1, false);
                 isP1 = false;
@@ -131,4 +137,22 @@ public class CityV2 : NetworkBehaviour {
         }
 
     }
+
+	IEnumerator AfterCaptureProcedure()
+	{
+		tmpMat = meshR.material;
+		yield return new WaitForSecondsRealtime (.3f);
+		meshR.material = matNeutralHover;
+		yield return new WaitForSecondsRealtime (.3f);
+		meshR.material = tmpMat;
+		yield return new WaitForSecondsRealtime (.3f);
+		meshR.material = matNeutralHover;
+		yield return new WaitForSecondsRealtime (.2f);
+		meshR.material = tmpMat;
+		yield return new WaitForSecondsRealtime (.2f);
+		meshR.material = matNeutralHover;
+		yield return new WaitForSecondsRealtime (.1f);
+		meshR.material = tmpMat;
+
+	}
 }
