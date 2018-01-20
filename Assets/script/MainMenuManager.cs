@@ -17,6 +17,10 @@ public class MainMenuManager : MonoBehaviour
 	public int numberOfLosses;
 	public Button startOnlineGameBtn;
 
+	public Text winsTxt;
+	public Text lossesTxt;
+	public Text gamesPlayedTxt;
+
 	void Start()
 	{
 		if(!PlayerPrefs.HasKey("PLAYER_NAME"))
@@ -31,7 +35,9 @@ public class MainMenuManager : MonoBehaviour
 		numberOfWins = PlayerPrefs.GetInt ("WINS");
 		numberOfLosses = PlayerPrefs.GetInt ("LOSSES");
 		numberOfGamesPlayed = numberOfWins + numberOfLosses;
-
+		winsTxt.text = "Wins: "+numberOfWins;
+		lossesTxt.text = "Losses: " + numberOfLosses;
+		gamesPlayedTxt.text = numberOfGamesPlayed + " Games played!";
 	}
 //
 //	public void StartNewGame()

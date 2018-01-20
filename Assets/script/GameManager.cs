@@ -234,6 +234,28 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator EndOfGame()
 	{
+		if (citiesPlayer1.Count > citiesPlayer2.Count) {
+			if (localPlayerObj.GetComponent<PlayerNetworkManager> ().isServer) {
+				//si t'es le serveur et que t'as plus de villes : t'as gagné!
+				int i = PlayerPrefs.GetInt ("WINS");
+				PlayerPrefs.SetInt ("WINS", i + 1);
+			} else {
+				//t'as perdu :(
+				int i = PlayerPrefs.GetInt ("LOSSES");
+				PlayerPrefs.SetInt ("LOSSES", i + 1);
+			}
+		} else 
+		{
+			if (!localPlayerObj.GetComponent<PlayerNetworkManager> ().isServer) {
+				//si t'es le serveur et que t'as plus de villes : t'as gagné!
+				int i = PlayerPrefs.GetInt ("WINS");
+				PlayerPrefs.SetInt ("WINS", i + 1);
+			} else {
+				//t'as perdu :(
+				int i = PlayerPrefs.GetInt ("LOSSES");
+				PlayerPrefs.SetInt ("LOSSES", i + 1);
+			}
+		}
 		backToMenuEndGameButton.SetActive (true);
 		StartCoroutine( ShowInfo ("The Game will restart in 10 seconds...", 10f));
 		yield return new WaitForSecondsRealtime (10f);
@@ -241,6 +263,14 @@ public class GameManager : MonoBehaviour {
 
 	public void GoBackToMenu()
 	{
+		//on check quand tu quittes si il reste des points a prnedre: si oui c'est abandon donc loose.
+		//faudrait aussi checker voir si t'es solo...si t'es solo ca compte ptete pas ? mais je laisse la place en attendant
+		//une possible IA.
+		if (positionPossible > 0) 
+		{
+			int i = PlayerPrefs.GetInt("LOSSES");
+			PlayerPrefs.SetInt ("LOSSES", i + 1);
+		}
 		StopCoroutine ("EndOfGame");
 
 		NATTraversal.NetworkManager.singleton.StopHost();
