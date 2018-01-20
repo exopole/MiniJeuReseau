@@ -5,6 +5,11 @@ using UnityEngine.Networking;
 
 public class LineController : NetworkBehaviour {
 
+	public AudioSource audioS;
+	public AudioClip hoverSnd;
+	public AudioClip barrageSnd;
+	public AudioClip roadSnd;
+
     public CityV2[] cities;
 	[SyncVar]public int lineID;
     public bool isModified = false;
@@ -40,6 +45,7 @@ public class LineController : NetworkBehaviour {
 	void OnMouseEnter()
 	{
 		if (!isModified) {
+			audioS.PlayOneShot (hoverSnd);
 			if (Input.GetKey (KeyCode.LeftControl)) 
 			{
 				lineR.material = matHoverBarrage;
@@ -64,6 +70,8 @@ public class LineController : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcChangeTheLineToRoad()
 	{
+		audioS.PlayOneShot (roadSnd);
+
 		isModified = true;
 		lineR.material = GameManager.instance.road;
 		cities[0].linkCities.Add(cities[1]);
@@ -77,6 +85,8 @@ public class LineController : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcChangeTheLineToBarrage()
 	{
+		audioS.PlayOneShot (barrageSnd);
+
 		isModified = true;
 		lineR.material = GameManager.instance.barrage;
 		StartCoroutine (AfterCaptureProcedure ());

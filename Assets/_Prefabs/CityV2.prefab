@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23313147752785982}
   - component: {fileID: 114408912201414542}
   - component: {fileID: 114219861074128018}
+  - component: {fileID: 82952762295616882}
   m_Layer: 0
   m_Name: CityV2
   m_TagString: Untagged
@@ -157,6 +158,86 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1481737336154150}
   m_Mesh: {fileID: 4300000, guid: 083f6b5b64250c0418cf4cdc6bce40cb, type: 3}
+--- !u!82 &82952762295616882
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1152473276763978}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.6
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114219861074128018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b737308cbc9d2e645a1a9c86694a7cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverSnd: {fileID: 8300000, guid: 9311d1dfc5dd1e34689ba75a517ae252, type: 3}
+  CapturedSnd: {fileID: 8300000, guid: 93b615918e694e14595ce15ef7c12476, type: 3}
+  audioS: {fileID: 82952762295616882}
   linkCities: []
   isTaken: 0
   isP1: 0

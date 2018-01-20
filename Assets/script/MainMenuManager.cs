@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour 
 {
+	public AudioClip clic1Snd;
+
 	public string playerName;
 	public Text playerNameDisplay;
 	public bool FirstTimePlaying;
@@ -39,6 +41,8 @@ public class MainMenuManager : MonoBehaviour
 //
 	public void QuitGame()
 	{
+		GetComponent<AudioSource> ().PlayOneShot (clic1Snd);
+
 		Application.Quit ();
 	}
 	public void ChangeMyPlayerName(string name)
@@ -46,6 +50,7 @@ public class MainMenuManager : MonoBehaviour
 		playerName = name;
 		PlayerPrefs.SetString ("PLAYER_NAME", name);
 		playerNameDisplay.text = playerName;
+		GetComponent<AudioSource> ().PlayOneShot (clic1Snd);
 
 	}
 		

@@ -27,9 +27,12 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
 //		}
 //	}
 	bool isJoiningOrCreating;
+	public AudioClip clic1Snd;
+	public AudioClip startGameSnd;
 
 	public void JoinOrCreateOnlineGame()
 	{
+		GetComponent<AudioSource> ().PlayOneShot (clic1Snd);
 		if (!isJoiningOrCreating) {
 		matchMaker.ListMatches(0, 10, "", true, 0, 0, OnMatchList);
 			isJoiningOrCreating = true;
@@ -58,6 +61,8 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
 
         if (matchCount == 0)
         {
+			GetComponent<AudioSource> ().PlayOneShot (startGameSnd);
+
 			if (matchMaker == null) matchMaker = gameObject.AddComponent<NetworkMatch>();
 			StartMatchMaker();
 			StartHostAll("VersionDev",2,true,"",0,0,7777,null);
@@ -75,12 +80,14 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
 
         if (match == null)
         {
+
             Debug.Log("Match list is empty");
 			isJoiningOrCreating = false;
 
             return;
         }
 
+		GetComponent<AudioSource> ().PlayOneShot (startGameSnd);
         Debug.Log("Found a match, joining");
 
         matchID = match.networkId;

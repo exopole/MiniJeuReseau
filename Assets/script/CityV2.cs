@@ -5,6 +5,9 @@ using UnityEngine.Networking;
 
 public class CityV2 : NetworkBehaviour {
 
+	public AudioClip hoverSnd;
+	public AudioClip CapturedSnd;
+	public AudioSource audioS;
     public List<CityV2> linkCities;
     public bool isTaken = false;
     public bool isP1 = false;
@@ -50,7 +53,6 @@ public class CityV2 : NetworkBehaviour {
 	public void RpcCaptureCity(bool wasP1Turn)
 	{
 		isTaken = true;
-
 		if (wasP1Turn) 
 		{
 			meshR.material =GameManager.instance.player1.material;
@@ -74,6 +76,8 @@ public class CityV2 : NetworkBehaviour {
 		if (!isTaken) {
 			GameManager.instance.ChangeCursor (true);
 			meshR.material = matNeutralHover;
+			audioS.PlayOneShot (hoverSnd);
+
 		}
 	}
 
@@ -114,6 +118,7 @@ public class CityV2 : NetworkBehaviour {
 //                GameManager.instance.setPoint(+1, true);
 //                GameManager.instance.setPoint(-1, false);
                 isP1 = true;
+
                 foreach (CityV2 city in linkCities)
                 {
                     city.checkAppartenance();
@@ -140,6 +145,8 @@ public class CityV2 : NetworkBehaviour {
 
 	IEnumerator AfterCaptureProcedure()
 	{
+		audioS.PlayOneShot (CapturedSnd);
+
 		tmpMat = meshR.material;
 		yield return new WaitForSecondsRealtime (.3f);
 		meshR.material = matNeutralHover;
