@@ -31,8 +31,9 @@ public class PlayerNetworkManager : NetworkBehaviour
 	{
 		if (!isLocalPlayer) {
 			NATTraversal.NetworkManager.singleton.StopHost ();
-			Destroy (NATTraversal.NetworkManager.singleton.gameObject);
-
+			if (NATTraversal.NetworkManager.singleton) {
+				Destroy (NATTraversal.NetworkManager.singleton.gameObject);
+			}
 		}
 	}
 

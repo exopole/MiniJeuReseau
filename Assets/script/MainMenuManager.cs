@@ -12,7 +12,7 @@ public class MainMenuManager : MonoBehaviour
 	public bool FirstTimePlaying;
 	public int numberOfGamesPlayed;
 	public int numberOfWins;
-	public int numberOfLoose;
+	public int numberOfLosses;
 	public Button startOnlineGameBtn;
 
 	void Start()
@@ -20,16 +20,23 @@ public class MainMenuManager : MonoBehaviour
 		if(!PlayerPrefs.HasKey("PLAYER_NAME"))
 		{
 			PlayerPrefs.SetString ("PLAYER_NAME", "NewPlayer");
+			PlayerPrefs.SetInt ("WINS", 0);
+			PlayerPrefs.SetInt ("LOSSES", 0);
+
 		}
 		playerName = PlayerPrefs.GetString ("PLAYER_NAME");
 		playerNameDisplay.text = playerName;
+		numberOfWins = PlayerPrefs.GetInt ("WINS");
+		numberOfLosses = PlayerPrefs.GetInt ("LOSSES");
+		numberOfGamesPlayed = numberOfWins + numberOfLosses;
+
 	}
-
-	public void StartNewGame()
-	{
-		SceneManager.LoadScene (1);
-	} 
-
+//
+//	public void StartNewGame()
+//	{
+//		SceneManager.LoadScene (1);
+//	} 
+//
 	public void QuitGame()
 	{
 		Application.Quit ();
@@ -41,17 +48,5 @@ public class MainMenuManager : MonoBehaviour
 		playerNameDisplay.text = playerName;
 
 	}
-
-//	public void InitializeTheMenuBtn()
-//	{
-//		startOnlineGameBtn.onClick.RemoveAllListeners ();
-//		startOnlineGameBtn.onClick.AddListener ( StartAnOnlineGameCapsule);
-//	}
-//
-//	public void StartAnOnlineGameCapsule()
-//	{
-//		Debug.Log ("done");
-////		NATTraversal.NetworkManager.singleton.
-//	}
-
+		
 }

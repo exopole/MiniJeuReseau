@@ -26,10 +26,14 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
 //			instance = this;
 //		}
 //	}
+	bool isJoiningOrCreating;
 
 	public void JoinOrCreateOnlineGame()
 	{
+		if (!isJoiningOrCreating) {
 		matchMaker.ListMatches(0, 10, "", true, 0, 0, OnMatchList);
+			isJoiningOrCreating = true;
+		}
 	}
 
 
@@ -47,6 +51,7 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
 #endif
         if (!success)
         {
+			isJoiningOrCreating = false;
             Debug.Log("Failed to retrieve match list");
             return;
         }
@@ -56,6 +61,8 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
 			if (matchMaker == null) matchMaker = gameObject.AddComponent<NetworkMatch>();
 			StartMatchMaker();
 			StartHostAll("VersionDev",2,true,"",0,0,7777,null);
+			isJoiningOrCreating = false;
+
 //			StartHostAll("Hello World", customConfig ? (uint)(maxConnections + 1) : matchSize);   
 			return;
         }
@@ -69,6 +76,8 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
         if (match == null)
         {
             Debug.Log("Match list is empty");
+			isJoiningOrCreating = false;
+
             return;
         }
 
@@ -76,6 +85,8 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
 
         matchID = match.networkId;
         StartClientAll(match);
+		isJoiningOrCreating = false;
+
     }
 
 //    void OnGUI()
