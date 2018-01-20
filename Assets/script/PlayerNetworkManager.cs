@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class PlayerNetworkManager : NetworkBehaviour  
 {
 	[SyncVar] string playerName;
+	public bool needDeleteOnLoad = true;
 
 
 	// Use this for initialization
 	void Start () 
 	{
+
 		if (isLocalPlayer && !isServer) 
 		{
 			Invoke( "ActuNameOnClient",1f);
@@ -29,10 +31,12 @@ public class PlayerNetworkManager : NetworkBehaviour
 
 	void OnDisable()
 	{
-		if (!isLocalPlayer) {
-			NATTraversal.NetworkManager.singleton.StopHost ();
-			if (NATTraversal.NetworkManager.singleton) {
-				Destroy (NATTraversal.NetworkManager.singleton.gameObject);
+		if (needDeleteOnLoad) {
+			if (!isLocalPlayer) {
+				NATTraversal.NetworkManager.singleton.StopHost ();
+				if (NATTraversal.NetworkManager.singleton) {
+					Destroy (NATTraversal.NetworkManager.singleton.gameObject);
+				}
 			}
 		}
 	}

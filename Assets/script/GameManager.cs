@@ -234,6 +234,13 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator EndOfGame()
 	{
+
+		PlayerNetworkManager[] players = GameObject.FindObjectsOfType <PlayerNetworkManager> ()as PlayerNetworkManager[];
+		foreach (var player in players) 
+		{
+			player.needDeleteOnLoad = false;
+			
+		}
 		if (citiesPlayer1.Count > citiesPlayer2.Count) {
 			if (localPlayerObj.GetComponent<PlayerNetworkManager> ().isServer) {
 				//si t'es le serveur et que t'as plus de villes : t'as gagné!
@@ -266,10 +273,11 @@ public class GameManager : MonoBehaviour {
 		//on check quand tu quittes si il reste des points a prnedre: si oui c'est abandon donc loose.
 		//faudrait aussi checker voir si t'es solo...si t'es solo ca compte ptete pas ? mais je laisse la place en attendant
 		//une possible IA.
-		if (positionPossible > 0) 
-		{
-			int i = PlayerPrefs.GetInt("LOSSES");
+		if (positionPossible > 0) {
+			int i = PlayerPrefs.GetInt ("LOSSES");
 			PlayerPrefs.SetInt ("LOSSES", i + 1);
+		} else 
+		{
 		}
 		StopCoroutine ("EndOfGame");
 
