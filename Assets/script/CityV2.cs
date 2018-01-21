@@ -18,12 +18,8 @@ public class CityV2 : NetworkBehaviour {
 	public Material matNeutral;
 	public Material matNeutralHover;
 	Material tmpMat; //utiliser pour faire clignoter
-<<<<<<< HEAD
-=======
-	bool isP1Turn;
 	public int defenseStr;
 	public int attackStr;
->>>>>>> 1d61b295e2370f7e7bb84bf6654871454c39e017
 
 
     private void OnMouseDown()
@@ -58,7 +54,7 @@ public class CityV2 : NetworkBehaviour {
 
 	public void CaptureThisCity()
 	{
-		isP1Turn = NetworkGameManager.instance.isPlayer1Turn;
+		bool isP1Turn = NetworkGameManager.instance.isPlayer1Turn;
 		GameManager.instance.localPlayerObj.GetComponent<PlayerNetworkManager> ().CaptureCity (cityID, isP1Turn);
 		isTaken = true;
 	}
