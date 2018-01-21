@@ -34,11 +34,21 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
 	{
 		GetComponent<AudioSource> ().PlayOneShot (clic1Snd);
 		if (!isJoiningOrCreating) {
-		matchMaker.ListMatches(0, 10, "", true, 0, 0, OnMatchList);
+		    matchMaker.ListMatches(0, 10, "", true, 0, 0, OnMatchList);
 			isJoiningOrCreating = true;
 		}
 	}
 
+    public void CreateGameSolo()
+    {
+        GetComponent<AudioSource>().PlayOneShot(clic1Snd);
+        if (!isJoiningOrCreating)
+        {
+            StartMatchMaker();
+            StartHostAll("VersionDev", 2, false, "", 0, 0, 7777, null);
+            isJoiningOrCreating = true;
+        }
+    }
 
 #if NEW_STUFF
     public override void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matchList)
@@ -63,7 +73,8 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
         {
 			GetComponent<AudioSource> ().PlayOneShot (startGameSnd);
 
-			if (matchMaker == null) matchMaker = gameObject.AddComponent<NetworkMatch>();
+			if (matchMaker == null)
+                matchMaker = gameObject.AddComponent<NetworkMatch>();
 			StartMatchMaker();
 			StartHostAll("VersionDev",2,true,"",0,0,7777,null);
 			isJoiningOrCreating = false;
