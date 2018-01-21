@@ -21,6 +21,10 @@ public class NetworkGameManager : NetworkBehaviour {
 		if (instance != null) 
 		{
 			Destroy (this);
+            if (SettingPlayer.instance.isSolo)
+            {
+                BeginTheGame();
+            }
 		}
 		instance = this;
 	}
@@ -43,7 +47,8 @@ public class NetworkGameManager : NetworkBehaviour {
 
 		}
 
-	}
+
+    }
 		
 	//hook. Pas besoin de run sur le serveur.
 	public void ActuPlayerTurn(bool isP1Turn)

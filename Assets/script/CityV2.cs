@@ -16,16 +16,15 @@ public class CityV2 : NetworkBehaviour {
 	public Material matNeutral;
 	public Material matNeutralHover;
 	Material tmpMat; //utiliser pour faire clignoter
-	bool isP1Turn;
 
 
     private void OnMouseDown()
 	{
 		if (NetworkGameManager.instance.GameHasBegun) {
 			if (!isTaken) {
-				if (NetworkGameManager.instance.isPlayer1Turn && isServer || !NetworkGameManager.instance.isPlayer1Turn && !isServer) 
+				if (NetworkGameManager.instance.isPlayer1Turn && isServer || !NetworkGameManager.instance.isPlayer1Turn && !isServer || SettingPlayer.instance.isSolo) 
 				{
-					isP1Turn = NetworkGameManager.instance.isPlayer1Turn;
+					bool isP1Turn = NetworkGameManager.instance.isPlayer1Turn;
 					GameManager.instance.localPlayerObj.GetComponent<PlayerNetworkManager> ().CaptureCity (cityID, isP1Turn);
 					isTaken = true;
 

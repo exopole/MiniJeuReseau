@@ -28,7 +28,7 @@ public class LineController : NetworkBehaviour {
 		if (NetworkGameManager.instance.GameHasBegun) {
 			
 			if (!isModified) {
-				if (NetworkGameManager.instance.isPlayer1Turn && isServer || !NetworkGameManager.instance.isPlayer1Turn && !isServer) {
+				if (NetworkGameManager.instance.isPlayer1Turn && isServer || !NetworkGameManager.instance.isPlayer1Turn && !isServer || SettingPlayer.instance.isSolo) {
 					if (Input.GetKey (KeyCode.LeftControl)) {
 						GameManager.instance.localPlayerObj.GetComponent<PlayerNetworkManager> ().CaptureLineMakeBarrage (lineID);
 						isModified = true;

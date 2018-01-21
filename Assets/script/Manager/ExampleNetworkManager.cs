@@ -34,6 +34,7 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
 	{
 		GetComponent<AudioSource> ().PlayOneShot (clic1Snd);
 		if (!isJoiningOrCreating) {
+            SettingPlayer.instance.isSolo = false;
 		    matchMaker.ListMatches(0, 10, "", true, 0, 0, OnMatchList);
 			isJoiningOrCreating = true;
 		}
@@ -44,9 +45,11 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
         GetComponent<AudioSource>().PlayOneShot(clic1Snd);
         if (!isJoiningOrCreating)
         {
+            SettingPlayer.instance.isSolo = true;
             StartMatchMaker();
             StartHostAll("VersionDev", 2, false, "", 0, 0, 7777, null);
             isJoiningOrCreating = true;
+
         }
     }
 

@@ -55,6 +55,10 @@ public class GameManager : MonoBehaviour {
             instance = this;
             positionPossible += cities.Length + lines.Length;
 			positionsLeftCount.text = positionPossible.ToString ();
+            if (SettingPlayer.instance.isSolo)
+            {
+                NetworkGameManager.instance.BeginTheGame();
+            }
         }
         else
             Destroy(gameObject);
